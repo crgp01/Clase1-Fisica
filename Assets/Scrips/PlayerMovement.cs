@@ -23,7 +23,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Rigid body movement excecuted in fixedupdate
+    private void Jumping()
+    {
+        rb.velocity = Vector3.up * 5;
+    }
+
     void FixedUpdate()
     {
         float horizontalAxis = Input.GetAxis("Horizontal");
@@ -35,15 +39,17 @@ public class PlayerMovement : MonoBehaviour
         //transform.position += movement * 5 * Time.deltaTime;
 
         if (jumpInput && OnGround()) {
-            rb.velocity = Vector3.up * 5;
+            Jumping();
             if (jumpInput && !OnGround())
             {
-                rb.velocity = Vector3.up * 5;
+                Jumping();
             }
             jumpInput = false;
         }
       
     }
+
+   
 
     /*private void OnTriggerEnter(Collider other)
      {
